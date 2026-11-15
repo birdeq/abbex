@@ -18,7 +18,8 @@
         "*://www.cell.com/*",
         "*://journals.plos.org/*",
         "*://academic.oup.com/*",
-        "*://www.tandfonline.com/*"
+        "*://www.tandfonline.com/*",
+        "*://www.biorxiv.org/*"
       ],
       "css": ["styles.css"],
       "js": ["content.js"]
