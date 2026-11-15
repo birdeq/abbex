@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Ablist",
+  "name": "AbbEx",
   "version": "1.0",
   "description": "Regex-based tool to compile and quickly access definitions in a sticky sidebar. Works on popular journals and libraries.",
   "content_scripts": [
