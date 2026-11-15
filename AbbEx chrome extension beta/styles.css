@@ -1,0 +1,88 @@
+#pubmed-abbrev-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 100vh;
+  background-color: #f8f9fa;
+  border-left: 1px solid #ddd;
+  padding: 0; 
+  box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+  z-index: 999999;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  transform: translateX(100%); 
+  transition: transform 0.25s ease-in-out;
+}
+
+#pubmed-abbrev-sidebar::before {
+  content: "AbbEx";
+  position: absolute;
+  top: 100px;
+  left: -80px; 
+  width: 80px;
+  height: 36px;
+  background-color: #20558a;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px 0 0 8px;
+  font-weight: bold;
+  font-size: 13px;
+  box-shadow: -4px 2px 8px rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+
+#pubmed-abbrev-sidebar:hover {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  padding: 20px 20px 0 20px;
+}
+
+#pubmed-abbrev-sidebar h2 {
+  font-size: 16px;
+  margin: 0;
+  border-bottom: 2px solid #20558a;
+  padding-bottom: 10px;
+  color: #333;
+}
+
+/* New Search Bar Styles */
+#pubmed-search {
+  width: 100%;
+  padding: 8px;
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Adjusting the list container to account for the new search bar's height */
+.list-container {
+  padding: 20px;
+  height: calc(100vh - 140px); 
+  overflow-y: auto;
+}
+
+/* Making the items look clickable */
+.abbrev-item {
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Hover effect */
+.abbrev-item:hover {
+  background-color: #e2e8f0; 
+}
+
+.abbrev-short {
+  font-weight: bold;
+  color: #20558a;
+}

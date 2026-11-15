@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Ablist",
+  "version": "1.0",
+  "description": "Regex-based tool to compile and quickly access definitions in a sticky sidebar. Works on popular journals and libraries.",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://pmc.ncbi.nlm.nih.gov/*",
+        "*://www.ovid.com/*",
+        "*://www.sciencedirect.com/*",
+        "*://www.nature.com/*",
+        "*://www.ncbi.nlm.nih.gov/pmc/*",
+        "*://pubmed.ncbi.nlm.nih.gov/*",
+        "*://www.science.org/*",
+        "*://onlinelibrary.wiley.com/*",
+        "*://link.springer.com/*",
+        "*://www.cell.com/*",
+        "*://journals.plos.org/*",
+        "*://academic.oup.com/*",
+        "*://www.tandfonline.com/*"
+      ],
+      "css": ["styles.css"],
+      "js": ["content.js"]
+    }
+  ]
+}
