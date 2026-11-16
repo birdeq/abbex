@@ -39,19 +39,39 @@ if (!document.getElementById('pubmed-abbrev-sidebar')) {
 
     searchInput.addEventListener('input', applySearchFilter);
 
-    //regex finna blow my shi smooth if this doesnt work
+    //oh boy i love regex finna blow my shi smooth if this doesnt work
     function extractAbbreviations() {
         const text = document.body.innerText;
         const regex = /((?:[\p{L}\p{N}\-]+\s+){1,10})\(\s*([\p{L}\p{N}\-]{2,10}s?)\s*\)/gu;
         const matches = [...text.matchAll(regex)];
         const abbreviationsMap = {};
 
+        //designated table for amino acids because these ones are weird and their freaking letters are not correlated with the first letter of the full name god I love english wooo yeah boy 
+        const aminoAcidRoots = {
+            'r': 'argin', 'n': 'asparagin', 'd': 'aspart', 'q': 'glutamin', 
+            'e': 'glutam', 'k': 'lys', 'f': 'phenylalanin', 'w': 'tryptophan', 'y': 'tyrosin'
+        };
+
+        //designated table for vendors and other blacklisted words because they are often in parenthesis in the m&m section which gets picked up falsely by the regex
+        const vendorBlacklist = new Set([
+            'vwr', 'abcam', 'sigma', 'gibco', 'invitrogen', 'promega', 
+            'qiagen', 'millipore', 'corning', 'illumina', 'biorad', 
+            'thermo', 'neb', 'atcc', 'merck', 'roche', 'zeiss', 'leica'
+        ]);
+
         matches.forEach(match => {
             const prefixStr = match[1].trim(); 
             const rawAbbrev = match[2]; 
             const cleanAbbrev = rawAbbrev.endsWith('s') ? rawAbbrev.slice(0, -1) : rawAbbrev;
             
+            // Skip citations (doesn't contain at least one letter)
             if (!/[\p{L}]/u.test(cleanAbbrev)) return;
+            
+            // --- THE BLACKLIST CHECK ---
+            // Convert the found term to lowercase and see if it's in our Set
+            if (vendorBlacklist.has(cleanAbbrev.toLowerCase()) || vendorBlacklist.has(rawAbbrev.toLowerCase())) {
+                return; // Instantly skip this loop iteration
+            }
             
             const abbrevLength = cleanAbbrev.length;
             const firstLetter = cleanAbbrev[0].toLowerCase();
@@ -60,9 +80,15 @@ if (!document.getElementById('pubmed-abbrev-sidebar')) {
             const searchWindow = words.slice(-windowSize);
             
             let startIndex = -1;
+            
             for (let i = 0; i < searchWindow.length; i++) {
                 const cleanWord = searchWindow[i].replace(/^[^a-z0-9α-ω\p{L}]/iu, '').toLowerCase();
-                if (cleanWord.startsWith(firstLetter)) {
+                
+                const isNormalMatch = cleanWord.startsWith(firstLetter);
+                const specialRoot = aminoAcidRoots[firstLetter];
+                const isAminoMatch = specialRoot && cleanWord.startsWith(specialRoot);
+                
+                if (isNormalMatch || isAminoMatch) {
                     startIndex = i;
                     break;
                 }
