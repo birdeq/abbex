@@ -3,26 +3,12 @@
   "name": "AbbEx",
   "version": "1.0",
   "description": "Regex-based tool to compile and quickly access definitions in a sticky sidebar. Works on popular journals and libraries.",
-  "content_scripts": [
-    {
-      "matches": [
-        "*://pmc.ncbi.nlm.nih.gov/*",
-        "*://www.ovid.com/*",
-        "*://www.sciencedirect.com/*",
-        "*://www.nature.com/*",
-        "*://www.ncbi.nlm.nih.gov/pmc/*",
-        "*://pubmed.ncbi.nlm.nih.gov/*",
-        "*://www.science.org/*",
-        "*://onlinelibrary.wiley.com/*",
-        "*://link.springer.com/*",
-        "*://www.cell.com/*",
-        "*://journals.plos.org/*",
-        "*://academic.oup.com/*",
-        "*://www.tandfonline.com/*",
-        "*://www.biorxiv.org/*"
-      ],
-      "css": ["styles.css"],
-      "js": ["content.js"]
-    }
-  ]
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "action": {},
+  "background": {
+    "service_worker": "background.js"
+  }
 }
