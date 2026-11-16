@@ -53,6 +53,7 @@ if (!document.getElementById('pubmed-abbrev-sidebar')) {
         };
 
         //designated table for vendors and other blacklisted words because they are often in parenthesis in the m&m section which gets picked up falsely by the regex
+        //lowkey if you are reading the m&m you should not be needing this extension though
         const vendorBlacklist = new Set([
             'vwr', 'abcam', 'sigma', 'gibco', 'invitrogen', 'promega', 
             'qiagen', 'millipore', 'corning', 'illumina', 'biorad', 
